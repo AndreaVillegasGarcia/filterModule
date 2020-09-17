@@ -13,6 +13,7 @@ Client.fromEnvironment(Transport, function (err, client) {
     });
 
     // connect to the Edge instance
+    // New change
     client.open(function (err) {
       if (err) {
         throw err;
