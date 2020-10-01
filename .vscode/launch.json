@@ -21,6 +21,27 @@
         "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",
         "EdgeModuleCACertificateFile": "${config:azure-iot-edge.EdgeModuleCACertificateFile}"
       }
+    },
+    {
+      "name": "AlarmModule Remote Debug (Node.js)",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "address": "localhost",
+      "localRoot": "${workspaceRoot}/modules/AlarmModule",
+      "remoteRoot": "/app",
+      "protocol": "inspector"
+    },
+    {
+      "name": "AlarmModule Local Debug (Node.js)",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/modules/AlarmModule/app.js",
+      "console": "integratedTerminal",
+      "env": {
+        "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",
+        "EdgeModuleCACertificateFile": "${config:azure-iot-edge.EdgeModuleCACertificateFile}"
+      }
     }
   ]
 }

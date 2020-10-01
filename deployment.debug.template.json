@@ -79,6 +79,29 @@
                 }
               }
             }
+          },
+          "AlarmModule": {
+            "version": "1.0",
+            "type": "docker",
+            "status": "running",
+            "restartPolicy": "always",
+            "settings": {
+              "image": "${MODULES.AlarmModule.debug}",
+              "createOptions": {
+                "ExposedPorts": {
+                  "9229/tcp": {}
+                },
+                "HostConfig": {
+                  "PortBindings": {
+                    "9229/tcp": [
+                      {
+                        "HostPort": "9229"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -88,7 +111,8 @@
         "schemaVersion": "1.0",
         "routes": {
           "FilterModuleToIoTHub": "FROM /messages/modules/FilterModule/outputs/* INTO $upstream",
-          "sensorToFilterModule": "FROM /messages/* INTO BrokeredEndpoint(\"/modules/FilterModule/inputs/input1\")"
+          "sensorToFilterModule": "FROM /messages/* INTO BrokeredEndpoint(\"/modules/FilterModule/inputs/input1\")",
+          "AlarmModuleToIoTHub": "FROM /messages/modules/AlarmModule/outputs/* INTO $upstream"
         },
         "storeAndForwardConfiguration": {
           "timeToLiveSecs": 7200
